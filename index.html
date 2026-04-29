@@ -933,10 +933,10 @@
     <!-- Application Logic & Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, orderBy, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // 1. Firebase Configuration (Provided by User)
+        // 1. Firebase Configuration (Replace with your keys)
         const firebaseConfig = {
             apiKey: "AIzaSyAdzA8OJfH60d6IvGDaFVkUUFbcXXA-dY8",
             authDomain: "cloth-website-1cb2f.firebaseapp.com",
@@ -1057,6 +1057,18 @@
                         avatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=00f3ff&color=000`;
                         
                         avatar.classList.remove('hidden');
+                        document.getElementById('navOrdersBtn').classList.remove('hidden');
+
+                        // --- NEW: SAVE USER TO DATABASE FOR MASS EMAILS ---
+                        try {
+                            if (user.email) {
+                                await setDoc(doc(db, 'users', user.uid), {
+                                    email: user.email,
+                                    displayName: displayName,
+                                    lastActive: serverTimestamp()
+                                }, { merge: true });
+                            }
+                        } catch(e) { console.error("Failed to save user email:", e); }
                         
                         // Start real-time sync for this user's orders
                         listenToMyOrders(user.email);
