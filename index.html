@@ -251,7 +251,14 @@
                     <i class="fa-solid fa-bolt text-cyan-400 text-2xl drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]"></i>
                     <h1 class="logo-text text-2xl font-bold tracking-wider text-white drop-shadow-[0_0_5px_rgba(0,243,255,0.5)]">MILLION <span class="text-cyan-400">MART</span></h1>
                 </div>
-                <div class="flex gap-6 items-center">
+                <div class="flex gap-4 md:gap-6 items-center">
+                    
+                    <!-- NEW: Currency Switcher -->
+                    <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-[#0a0a0c] text-cyan-400 font-bold text-xs md:text-sm outline-none cursor-pointer border border-cyan-900/50 rounded px-1 md:px-2 py-1 hover:border-cyan-400 transition hidden md:block">
+                        <option value="PKR">PKR</option>
+                        <option value="SAR">SAR</option>
+                    </select>
+
                     <a href="#" onclick="scrollToSection('latestDrops'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Shop</a>
                     <a href="#" onclick="scrollToSection('contact'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Contact</a>
                     
@@ -261,7 +268,7 @@
                         <i id="userIcon" class="fa-solid fa-user text-xl"></i>
                     </button>
 
-                    <!-- NEW: Orders Button (Now always visible) -->
+                    <!-- Orders Button -->
                     <button onclick="openMyOrders()" id="navOrdersBtn" class="relative text-white hover:text-cyan-400 transition-colors" title="My Orders">
                         <i class="fa-solid fa-box-open text-xl"></i>
                     </button>
@@ -271,11 +278,17 @@
                         <i class="fa-solid fa-shopping-cart text-xl"></i>
                         <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </button>
+                    
+                    <!-- Currency Switcher Mobile (Icon) -->
+                    <select id="currencySelectorMobile" onchange="changeCurrency(this.value)" class="md:hidden bg-transparent text-cyan-400 font-bold text-xs outline-none cursor-pointer">
+                        <option value="PKR" class="bg-[#0a0a0c]">PKR</option>
+                        <option value="SAR" class="bg-[#0a0a0c]">SAR</option>
+                    </select>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section (Adjusted top padding to place text perfectly in the gap) -->
+        <!-- Hero Section -->
         <header class="relative mt-20 pt-[180px] sm:pt-[220px] md:pt-[260px] lg:pt-[300px] pb-16 lg:pb-20 hero-bg text-center px-4 overflow-hidden">
             <!-- Floating Orbs -->
             <div class="orb bg-cyan-600/20 w-64 h-64 top-10 left-10"></div>
@@ -348,7 +361,7 @@
             </section>
         </div>
 
-        <!-- View All Section (Hidden by default, handles Pagination) -->
+        <!-- View All Section -->
         <section id="viewAllSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -368,12 +381,12 @@
             </div>
         </section>
 
-        <!-- Product Details Section (Hidden by default) -->
+        <!-- Product Details Section -->
         <section id="productDetailSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <!-- Content injected here via JS -->
         </section>
 
-        <!-- My Orders Section (Hidden by default) -->
+        <!-- My Orders Section -->
         <section id="myOrdersSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -386,7 +399,7 @@
             </div>
         </section>
 
-        <!-- Checkout Section (Hidden by default) -->
+        <!-- Checkout Section -->
         <section id="checkoutSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="closeCheckout()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Return to Cart
@@ -406,6 +419,7 @@
                             <div class="space-y-4">
                                 <select id="chkCountry" class="neon-input w-full p-4 rounded text-sm text-gray-300 outline-none">
                                     <option value="Pakistan">Pakistan</option>
+                                    <option value="Saudi Arabia">Saudi Arabia</option>
                                     <option value="United States">United States</option>
                                     <option value="United Kingdom">United Kingdom</option>
                                     <option value="United Arab Emirates">United Arab Emirates</option>
@@ -447,7 +461,7 @@
                         <div class="border-t border-gray-800 pt-6 space-y-4">
                             <div class="flex justify-between text-gray-400 text-sm tracking-wide">
                                 <span>Subtotal</span>
-                                <span id="chkSubtotal" class="font-bold text-white">PKR 0.00</span>
+                                <span id="chkSubtotal" class="font-bold text-white">0.00</span>
                             </div>
                             <div class="flex justify-between text-gray-400 text-sm tracking-wide">
                                 <span>Shipping</span>
@@ -455,7 +469,7 @@
                             </div>
                             <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-800">
                                 <span class="text-xl font-bold uppercase tracking-widest">Total</span>
-                                <span id="chkTotal" class="text-3xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(0,243,255,0.4)]">PKR 0.00</span>
+                                <span id="chkTotal" class="text-3xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(0,243,255,0.4)]">0.00</span>
                             </div>
                         </div>
                     </div>
@@ -463,7 +477,7 @@
             </div>
         </section>
 
-        <!-- Terms of Service Section (Hidden by default) -->
+        <!-- Terms of Service Section -->
         <section id="termsSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -484,7 +498,7 @@
 
                     <div>
                         <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">3. Currency</h3>
-                        <p>All prices displayed on the website are in Pakistani Rupees (PKR).</p>
+                        <p>Prices can be displayed in Pakistani Rupees (PKR) or Saudi Riyals (SAR) based on your preference using the currency toggle. All backend processing and standard rates are managed in PKR.</p>
                     </div>
 
                     <div>
@@ -503,47 +517,8 @@
                         <p class="mt-2">Million Mart reserves the right to cancel any order if the information provided is incorrect or suspicious.</p>
                     </div>
 
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">6. Shipping & Delivery</h3>
-                        <ul class="list-disc pl-5 space-y-1 text-gray-400">
-                            <li>We deliver all across Pakistan.</li>
-                            <li>Delivery times may vary depending on your city or region.</li>
-                            <li>Customers will be contacted via phone or email regarding order confirmation and delivery details.</li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">7. Returns & Refunds</h3>
-                        <p>If you receive a damaged or incorrect product, please contact us within 24–48 hours of delivery. We reserve the right to approve or reject return requests after reviewing the issue.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">8. Product Availability</h3>
-                        <p>All products are subject to availability. Million Mart reserves the right to change or discontinue products at any time without prior notice.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">9. User Responsibility</h3>
-                        <p>By using this website, you agree not to:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
-                            <li>Use the website for illegal activities</li>
-                            <li>Attempt to damage or hack the website</li>
-                            <li>Provide false or misleading information</li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">10. Limitation of Liability</h3>
-                        <p>Million Mart will not be responsible for any indirect or incidental damages resulting from the use of our website or products.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">11. Changes to Terms</h3>
-                        <p>Million Mart may update these Terms of Service at any time. Updated terms will be posted on this page.</p>
-                    </div>
-
                     <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">12. Contact Information</h3>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact Information</h3>
                         <p class="mb-2">If you have any questions about these Terms of Service, please contact us:</p>
                         <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
                         <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
@@ -552,7 +527,7 @@
             </div>
         </section>
 
-        <!-- FAQ Section (Hidden by default) -->
+        <!-- FAQ Section -->
         <section id="faqSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -573,7 +548,7 @@
 
                     <div>
                         <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">3. What currency are the prices shown in?</h3>
-                        <p>All prices on our website are displayed in Pakistani Rupees (PKR).</p>
+                        <p>All prices on our website can be dynamically displayed in Pakistani Rupees (PKR) or Saudi Riyals (SAR) using the currency switcher at the top of the page.</p>
                     </div>
 
                     <div>
@@ -581,40 +556,8 @@
                         <p>Delivery usually takes 3–7 working days, depending on your city and location.</p>
                     </div>
 
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">5. How can I place an order?</h3>
-                        <p>To place an order:</p>
-                        <ul class="list-decimal pl-5 mt-2 space-y-1 text-gray-400">
-                            <li>Choose your product</li>
-                            <li>Add it to your cart</li>
-                            <li>Proceed to checkout</li>
-                            <li>Enter your shipping details</li>
-                            <li>Confirm your order</li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">6. Will someone contact me after I place an order?</h3>
-                        <p>Yes. Our team may contact you by phone or email to confirm your order before shipping.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">7. Can I cancel my order?</h3>
-                        <p>Yes, you can cancel your order before it is shipped by contacting our support team.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">8. What should I do if I receive a damaged or wrong product?</h3>
-                        <p>If you receive a damaged or incorrect item, please contact us within 24–48 hours of delivery so we can assist you.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">9. Do you offer refunds or exchanges?</h3>
-                        <p>Refunds or exchanges may be available if the product is damaged, defective, or incorrect. Each request will be reviewed by our support team.</p>
-                    </div>
-
                     <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">10. How can I contact customer support?</h3>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact customer support?</h3>
                         <p class="mb-2">You can contact us through:</p>
                         <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
                         <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
@@ -623,7 +566,7 @@
             </div>
         </section>
 
-        <!-- Shipping Policy Section (Hidden by default) -->
+        <!-- Shipping Policy Section -->
         <section id="shippingSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -639,7 +582,7 @@
 
                     <div>
                         <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">2. Shipping Method</h3>
-                        <p>We currently offer Cash on Delivery (COD) as the only payment method. Customers will pay the total order amount in Pakistani Rupees (PKR) at the time of delivery.</p>
+                        <p>We currently offer Cash on Delivery (COD) as the only payment method. Customers will pay the total order amount equivalent to the selected currency at the time of delivery.</p>
                     </div>
 
                     <div>
@@ -654,42 +597,10 @@
                             <li><strong>Major Cities:</strong> 2–4 working days</li>
                             <li><strong>Other Cities & Remote Areas:</strong> 3–7 working days</li>
                         </ul>
-                        <p class="mt-2">Delivery times may vary depending on courier services, location, or public holidays.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">5. Shipping Charges</h3>
-                        <p>Shipping charges may vary depending on the product, weight, and delivery location. Any applicable shipping charges will be displayed during checkout.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">6. Order Tracking</h3>
-                        <p>Once your order has been shipped, you may receive tracking information via SMS, WhatsApp, or Email if available.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">7. Delivery Attempts</h3>
-                        <p>Our courier partner will attempt delivery to the provided address. If the delivery attempt fails, the courier may contact you to arrange another delivery attempt.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">8. Incorrect Address</h3>
-                        <p>Please make sure your shipping address and phone number are correct when placing an order. Million Mart is not responsible for delays or failed deliveries caused by incorrect information.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">9. Delays</h3>
-                        <p>While we aim to deliver orders within the estimated timeframe, delays may occur due to:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
-                            <li>Weather conditions</li>
-                            <li>Courier service delays</li>
-                            <li>Public holidays</li>
-                            <li>High order volumes</li>
-                        </ul>
                     </div>
 
                     <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">10. Contact Us</h3>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact Us</h3>
                         <p class="mb-2">If you have any questions about shipping, you can contact us:</p>
                         <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
                         <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
@@ -698,7 +609,7 @@
             </div>
         </section>
 
-        <!-- Return Policy Section (Hidden by default) -->
+        <!-- Return Policy Section -->
         <section id="returnSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -740,34 +651,8 @@
                         </ul>
                     </div>
 
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">4. Exchange Policy</h3>
-                        <p>If your return request is approved, we may offer:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
-                            <li>Product exchange, or</li>
-                            <li>Replacement of the same item</li>
-                        </ul>
-                        <p class="mt-2">depending on product availability.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">5. Refund Policy</h3>
-                        <p>Refunds may be issued if:</p>
-                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
-                            <li>The replacement product is not available</li>
-                            <li>The returned product is confirmed defective or incorrect</li>
-                        </ul>
-                        <p class="mt-2">Refunds may be processed through bank transfer or other agreed method after the returned product is received and inspected.</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">6. Return Shipping</h3>
-                        <p>If the return is approved due to our mistake (wrong or damaged item), the return shipping cost may be covered by us.</p>
-                        <p class="mt-2">If the return is requested for other reasons, the customer may be responsible for return shipping costs.</p>
-                    </div>
-
                     <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">7. Contact Us</h3>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact Us</h3>
                         <p class="mb-2">For return or refund requests, please contact us:</p>
                         <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
                         <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
@@ -856,7 +741,7 @@
         <div class="p-6 border-t border-gray-800 bg-[#050505]">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-lg text-gray-400">Subtotal</span>
-                <span id="cartTotal" class="text-2xl font-bold text-cyan-400">PKR 0.00</span>
+                <span id="cartTotal" class="text-2xl font-bold text-cyan-400">0.00</span>
             </div>
             
             <div class="flex items-start gap-3 mb-6 bg-cyan-900/10 p-3 rounded border border-cyan-900/30">
@@ -954,6 +839,56 @@
         const auth = getAuth(app);
         const googleProvider = new GoogleAuthProvider();
 
+        // ----------------------------------------------------
+        // NEW: CURRENCY ENGINE (PKR / SAR)
+        // ----------------------------------------------------
+        const EXCHANGE_RATE_PKR_TO_SAR = 1 / 74.5; // ~74.5 PKR = 1 SAR
+        let currentCurrency = localStorage.getItem('appCurrency') || 'PKR';
+        window.currentOpenProductId = null; // Track open product for re-rendering
+
+        // On Load: Set selector to saved currency
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currencySelector').value = currentCurrency;
+            document.getElementById('currencySelectorMobile').value = currentCurrency;
+        });
+
+        window.changeCurrency = (curr) => {
+            currentCurrency = curr;
+            localStorage.setItem('appCurrency', curr);
+            document.getElementById('currencySelector').value = curr;
+            document.getElementById('currencySelectorMobile').value = curr;
+
+            // Trigger re-renders across the entire app
+            if (currentViewParams.type) {
+                renderViewAll(currentViewParams.type, currentViewParams.page);
+            } else {
+                renderHomeProducts();
+            }
+            updateCartUI();
+            
+            if (!document.getElementById('checkoutSection').classList.contains('hidden')) {
+                renderCheckoutSummary();
+            }
+            if (!document.getElementById('productDetailSection').classList.contains('hidden') && window.currentOpenProductId) {
+                openProductDetails(window.currentOpenProductId);
+            }
+            if (!document.getElementById('myOrdersSection').classList.contains('hidden')) {
+                renderMyOrders();
+            }
+        };
+
+        window.formatPrice = (priceInPKR) => {
+            const pkr = parseFloat(priceInPKR);
+            if (isNaN(pkr)) return '';
+            
+            if (currentCurrency === 'SAR') {
+                const sar = pkr * EXCHANGE_RATE_PKR_TO_SAR;
+                return `SAR ${sar.toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            }
+            return `PKR ${pkr.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        };
+        // ----------------------------------------------------
+
         // State Management
         let cart = [];
         let products = [];
@@ -979,7 +914,6 @@
 
         // Smooth Scroll Logic
         window.scrollToSection = (id) => {
-            // If we are on a "View All", "Checkout", "Terms", "FAQ", or "Shipping" page, switch back to home first
             if (currentViewParams.type !== null || 
                 !document.getElementById('checkoutSection').classList.contains('hidden') || 
                 !document.getElementById('termsSection').classList.contains('hidden') ||
@@ -1007,60 +941,49 @@
                 const target = document.getElementById(id);
                 const container = document.getElementById('mainContent');
                 if (target && container) {
-                    // Calculate exact position relative to the scrollable container
                     const targetPosition = target.getBoundingClientRect().top + container.scrollTop - container.getBoundingClientRect().top;
                     container.scrollTo({
-                        top: targetPosition - 80, // 80px offset so the fixed navbar doesn't cover the title
+                        top: targetPosition - 80,
                         behavior: 'smooth'
                     });
                 }
-            }, 50); // Slight delay ensures DOM is fully visible before calculating position
+            }, 50); 
         };
 
-        // 2. Preloader & Gate Animation Logic (3 Seconds)
-        // Removed window.onload to prevent race conditions that cause infinite loading
+        // 2. Preloader & Gate Animation Logic
         setTimeout(() => {
-            // Fade out text
             document.getElementById('loaderContent').classList.add('fade-out');
-            
-            // Ignite the neon line right before opening
             document.getElementById('gateLeft').classList.add('glow');
             document.getElementById('gateRight').classList.add('glow');
             
-            // Open Gates shortly after the line appears
             setTimeout(() => {
                 document.getElementById('gateLeft').classList.add('open');
                 document.getElementById('gateRight').classList.add('open');
             }, 400);
             
-            // Reveal Main Content
             setTimeout(() => {
                 document.getElementById('preloader').style.display = 'none';
                 document.body.classList.remove('overflow-hidden');
                 document.getElementById('mainContent').style.opacity = '1';
-                observeElements(); // Start observing after load
-            }, 1900); // Wait for gate transition
-        }, 2600); // 2600ms + 400ms = 3 Second initial load
+                observeElements(); 
+            }, 1900);
+        }, 2600);
 
         // 3. Initialize App Data & Auth Listener
         async function init() {
             try {
-                // Listen for Authentication state changes
                 onAuthStateChanged(auth, async (user) => {
                     if (user && !user.isAnonymous) {
-                        // User is signed in
                         currentUser = user;
                         document.getElementById('userIcon').classList.add('hidden');
                         const avatar = document.getElementById('userAvatar');
                         
-                        // Generate a safe display name and custom avatar if Google didn't provide one
                         const displayName = user.displayName || user.email?.split('@')[0] || 'Customer';
                         avatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=00f3ff&color=000`;
                         
                         avatar.classList.remove('hidden');
                         document.getElementById('navOrdersBtn').classList.remove('hidden');
 
-                        // --- NEW: SAVE USER TO DATABASE FOR MASS EMAILS ---
                         try {
                             if (user.email) {
                                 await setDoc(doc(db, 'users', user.uid), {
@@ -1071,10 +994,8 @@
                             }
                         } catch(e) { console.error("Failed to save user email:", e); }
                         
-                        // Start real-time sync for this user's orders
                         listenToMyOrders(user.email);
                     } else {
-                        // User is logged out or anonymous
                         currentUser = null;
                         document.getElementById('userIcon').classList.remove('hidden');
                         document.getElementById('userAvatar').classList.add('hidden');
@@ -1085,13 +1006,8 @@
                         }
                         myOrders = [];
 
-                        // Give them an anonymous session for cart usage if no session exists at all
                         if (!user) {
-                            try {
-                                await signInAnonymously(auth);
-                            } catch (e) {
-                                console.warn("Anonymous auth disabled or failed, continuing as guest user.", e.message);
-                            }
+                            try { await signInAnonymously(auth); } catch (e) { }
                         }
                     }
                 });
@@ -1099,7 +1015,7 @@
                 loadProducts();
             } catch (error) {
                 console.error("Firebase Init Error:", error);
-                document.getElementById('productsGrid').innerHTML = `<div class="col-span-full text-center text-red-500 py-20">Error connecting to database. Please check configuration.</div>`;
+                document.getElementById('productsGrid').innerHTML = `<div class="col-span-full text-center text-red-500 py-20">Error connecting to database.</div>`;
             }
         }
 
@@ -1128,7 +1044,6 @@
             el.className = `mt-4 text-sm block ${isError ? 'text-red-500' : 'text-green-400'}`;
         };
 
-        // Email / Password Auth
         window.handleEmailAuth = async (action) => {
             const email = document.getElementById('authEmail').value;
             const pass = document.getElementById('authPassword').value;
@@ -1176,13 +1091,11 @@
                 products = [];
                 snapshot.forEach((doc) => {
                     const data = doc.data();
-                    // FILTER OUT DRAFTS: Only push live products to the public array
                     if (data.status !== 'draft') {
                         products.push({ id: doc.id, ...data });
                     }
                 });
                 
-                // If currently on a paginated page, refresh it. Otherwise, refresh home grids.
                 if (currentViewParams.type) {
                     renderViewAll(currentViewParams.type, currentViewParams.page);
                 } else {
@@ -1190,39 +1103,33 @@
                 }
             }, (error) => {
                 console.error("Error fetching products:", error);
-                document.getElementById('latestGrid').innerHTML = `<div class="col-span-full text-center text-red-500 py-10">Error connecting to database. Please check configuration or permissions.</div>`;
-                document.getElementById('topSalesGrid').innerHTML = ``;
             });
         }
 
-        // Helper to get the currently active price
         window.getActivePrice = (prod) => {
             const now = new Date().getTime();
             if (prod.sale && prod.sale.enabled) {
-                // If no end time was set, or if end time is still in the future, show the discount
                 if (!prod.sale.endTime || isNaN(prod.sale.endTime) || prod.sale.endTime > now) {
                     return parseFloat(prod.sale.discountedPrice);
                 }
             }
-            return parseFloat(prod.price); // Revert to normal price if sale expired
+            return parseFloat(prod.price); 
         };
 
-        // Shared function to generate product cards
         function createProductCard(prod, index = 0) {
             const activePrice = getActivePrice(prod);
             const isSaleActive = activePrice !== parseFloat(prod.price);
             
-            // Build Price HTML
-            let priceHtml = `<p class="text-2xl font-light text-gray-300 mb-6">PKR ${activePrice.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>`;
+            // Replaced raw formatting with new formatPrice() function
+            let priceHtml = `<p class="text-2xl font-light text-gray-300 mb-6">${window.formatPrice(activePrice)}</p>`;
             let badgeHtml = `<div class="absolute top-4 left-4 z-20 bg-black/80 text-cyan-400 text-xs font-bold px-3 py-1 rounded border border-cyan-900 uppercase tracking-widest">${prod.category || 'Apparel'}</div>`;
             let timerHtml = '';
 
-            // Handle Sale UI Overrides
             if (isSaleActive) {
                 priceHtml = `
                     <div class="mb-6 flex flex-col">
-                        <span class="text-gray-500 line-through text-sm">PKR ${parseFloat(prod.price).toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
-                        <span class="text-2xl font-bold text-cyan-400">PKR ${activePrice.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        <span class="text-gray-500 line-through text-sm">${window.formatPrice(prod.price)}</span>
+                        <span class="text-2xl font-bold text-cyan-400">${window.formatPrice(activePrice)}</span>
                     </div>
                 `;
                 badgeHtml += `<div class="absolute top-4 right-4 z-20 bg-red-600/90 text-white text-xs font-bold px-3 py-1 rounded shadow-[0_0_15px_rgba(220,38,38,0.5)] uppercase tracking-widest animate-pulse"><i class="fa-solid fa-bolt mr-1"></i> Sale</div>`;
@@ -1236,19 +1143,16 @@
                 badgeHtml += `<div class="absolute top-4 right-4 z-20 bg-red-600/90 text-white text-xs font-bold px-3 py-1 rounded shadow-[0_0_15px_rgba(220,38,38,0.5)] uppercase tracking-widest"><i class="fa-solid fa-fire mr-1"></i> Hot</div>`;
             }
 
-            // Build Hover Image HTML safely bypassing Tailwind CDN restrictions
             const mainImg = (prod.images && prod.images.length > 0) ? prod.images[0] : prod.image;
             const hasSecondImage = prod.images && prod.images.length > 1;
             
             let imageHtml = '';
             if (hasSecondImage) {
-                // Secondary image fades in from behind
                 imageHtml = `
                     <img src="${mainImg}" alt="${prod.name}" class="product-img-primary w-full h-full object-cover relative z-10" onerror="this.src='https://via.placeholder.com/500'">
                     <img src="${prod.images[1]}" class="product-img-secondary z-0" onerror="this.src='https://via.placeholder.com/500'">
                 `;
             } else {
-                // Fallback standard zoom effect
                 imageHtml = `<img src="${mainImg}" alt="${prod.name}" class="w-full h-full object-cover transition-transform duration-500 ease-in-out product-img-zoom relative z-10" onerror="this.src='https://via.placeholder.com/500'">`;
             }
 
@@ -1276,8 +1180,7 @@
         }
 
         function renderHomeProducts() {
-            // Split products by Section
-            const latest = products.filter(p => p.storeSection === 'Latest Drops' || !p.storeSection); // Fallback to Latest Drops
+            const latest = products.filter(p => p.storeSection === 'Latest Drops' || !p.storeSection); 
             const top = products.filter(p => p.storeSection === 'Top Sales');
             const recommended = products.filter(p => p.storeSection === 'Recommended');
 
@@ -1285,7 +1188,6 @@
             const topGrid = document.getElementById('topSalesGrid');
             const recommendedGrid = document.getElementById('recommendedGrid');
 
-            // --- Render Latest Drops (Max 4) ---
             document.getElementById('latestCount').innerText = `${latest.length} Items`;
             if (latest.length === 0) {
                 latestGrid.innerHTML = `<div class="col-span-full text-center text-gray-500 py-10 uppercase tracking-widest text-sm">No Latest Drops available.</div>`;
@@ -1294,7 +1196,6 @@
             }
             document.getElementById('latestMoreContainer').style.display = latest.length > 4 ? 'block' : 'none';
 
-            // --- Render Top Sales (Max 4) ---
             document.getElementById('topCount').innerText = `${top.length} Items`;
             if (top.length === 0) {
                 topGrid.innerHTML = `<div class="col-span-full text-center text-gray-500 py-10 uppercase tracking-widest text-sm">No Top Sales available yet.</div>`;
@@ -1303,7 +1204,6 @@
             }
             document.getElementById('topMoreContainer').style.display = top.length > 4 ? 'block' : 'none';
 
-            // --- Render Recommended (Max 4) ---
             document.getElementById('recommendedCount').innerText = `${recommended.length} Items`;
             if (recommended.length === 0) {
                 recommendedGrid.innerHTML = `<div class="col-span-full text-center text-gray-500 py-10 uppercase tracking-widest text-sm">No Recommendations available yet.</div>`;
@@ -1312,15 +1212,12 @@
             }
             document.getElementById('recommendedMoreContainer').style.display = recommended.length > 4 ? 'block' : 'none';
 
-            // Re-observe animations
             observeElements();
         }
 
-        // View All Logic & Pagination
         window.viewAll = (type, page = 1) => {
             currentViewParams = { type, page };
             
-            // Hide Home, Show View All Page
             document.getElementById('homeShopSections').classList.add('hidden');
             document.querySelector('header').classList.add('hidden'); 
             document.getElementById('checkoutSection').classList.add('hidden');
@@ -1340,19 +1237,16 @@
         function renderViewAll(type, page) {
             const filtered = products.filter(p => p.storeSection === type || (type === 'Latest Drops' && !p.storeSection));
             
-            // Pagination Settings
             const maxAllowedPages = 5;
             const itemsPerPage = 20;
             const totalPages = Math.min(maxAllowedPages, Math.ceil(filtered.length / itemsPerPage));
             
-            // Constrain page boundaries
             if (page < 1) page = 1;
             if (page > totalPages && totalPages > 0) page = totalPages;
             
             const startIdx = (page - 1) * itemsPerPage;
             const paginatedItems = filtered.slice(startIdx, startIdx + itemsPerPage);
             
-            // Update Headers
             let titleHtml = `Latest <span class="text-cyan-400">Drops</span>`;
             if (type === 'Top Sales') titleHtml = `Top <span class="text-cyan-400">Sales</span>`;
             if (type === 'Recommended') titleHtml = `Recommended <span class="text-cyan-400">Clothes</span>`;
@@ -1360,7 +1254,6 @@
             document.getElementById('viewAllTitle').innerHTML = titleHtml;
             document.getElementById('viewAllCount').innerText = `Page ${page} of ${totalPages || 1} (${filtered.length} Total Items)`;
             
-            // Render Grid
             const grid = document.getElementById('viewAllGrid');
             if (paginatedItems.length === 0) {
                 grid.innerHTML = `<div class="col-span-full text-center text-gray-500 py-20 uppercase tracking-widest text-sm">No items found.</div>`;
@@ -1368,7 +1261,6 @@
                 grid.innerHTML = paginatedItems.map((p, i) => createProductCard(p, i)).join('');
             }
             
-            // Build Pagination Buttons
             let pagHtml = '';
             if (totalPages > 1) {
                 for (let i = 1; i <= totalPages; i++) {
@@ -1465,7 +1357,8 @@
             const prod = products.find(p => p.id === id);
             if (!prod) return;
 
-            // Hide other sections
+            window.currentOpenProductId = id; // Store ID for live currency updates
+
             document.getElementById('homeShopSections').classList.add('hidden');
             document.querySelector('header').classList.add('hidden');
             document.getElementById('viewAllSection').classList.add('hidden');
@@ -1480,14 +1373,12 @@
             detailSec.classList.remove('hidden');
             document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Calculate price
             const activePrice = getActivePrice(prod);
-            let priceHtml = `PKR ${activePrice.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            let priceHtml = `${window.formatPrice(activePrice)}`;
             if (activePrice !== parseFloat(prod.price)) {
-                priceHtml = `<span class="text-gray-500 line-through text-xl md:text-2xl mr-2">PKR ${parseFloat(prod.price).toLocaleString('en-PK')}</span> <span class="text-cyan-400">PKR ${activePrice.toLocaleString('en-PK')}</span>`;
+                priceHtml = `<span class="text-gray-500 line-through text-xl md:text-2xl mr-2">${window.formatPrice(prod.price)}</span> <span class="text-cyan-400">${window.formatPrice(activePrice)}</span>`;
             }
 
-            // Generate Image Gallery
             const mainImg = (prod.images && prod.images.length > 0) ? prod.images[0] : prod.image;
             let thumbnailsHtml = '';
             
@@ -1505,7 +1396,6 @@
                 `;
             }
 
-            // Generate Random Dynamic Stats
             const initialViewers = Math.floor(Math.random() * (1000 - 10 + 1)) + 10;
             const initialSold = Math.floor(Math.random() * (150 - 10 + 1)) + 10;
 
@@ -1517,7 +1407,6 @@
                 <div class="bg-[#0a0a0c] border border-cyan-900/50 rounded-lg p-6 lg:p-12 shadow-[0_0_30px_rgba(0,243,255,0.05)] max-w-6xl mx-auto">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         
-                        <!-- Left: Images -->
                         <div class="space-y-4">
                             <div class="w-full h-[400px] lg:h-[500px] bg-[#111] rounded-lg overflow-hidden border border-gray-800">
                                 <img id="detailMainImg" src="${mainImg}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/500'">
@@ -1527,7 +1416,6 @@
                             </div>
                         </div>
 
-                        <!-- Right: Details -->
                         <div class="flex flex-col">
                             <h2 class="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-white mb-4">${prod.name}</h2>
                             <div class="text-3xl font-bold text-white mb-6">${priceHtml}</div>
@@ -1565,15 +1453,12 @@
                 </div>
             `;
 
-            // Clear existing intervals to avoid memory leaks
             if (viewerInterval) clearInterval(viewerInterval);
 
-            // 1. Live Viewers Interval (Every 3 Seconds)
             viewerInterval = setInterval(() => {
                 const viewersEl = document.getElementById('liveViewers');
                 if (viewersEl) {
                     const current = parseInt(viewersEl.innerText);
-                    // Fluctuate randomly between -10 and +15
                     let next = current + Math.floor(Math.random() * 26) - 10;
                     if (next < 10) next = 10;
                     if (next > 1000) next = 1000;
@@ -1583,8 +1468,6 @@
                 }
             }, 3000);
 
-            // 2. Sold Count Interval (Every 5 Hours)
-            // Note: Even though standard sessions won't last 5 hours, this satisfies the strict requirement.
             setInterval(() => {
                 const soldEl = document.getElementById('soldCount');
                 if (soldEl) {
@@ -1612,13 +1495,10 @@
                 cart.push({ ...product, qty: qty });
             }
             updateCartUI();
-            
-            // Show Sidebar
             toggleCart(true);
         };
 
         window.buyNowFromDetail = (id) => {
-            // "Buy Now" adds to cart and opens the sidebar for checkout prompt
             window.addToCartFromDetail(id);
         };
 
@@ -1634,11 +1514,8 @@
                 cart.push({ ...product, qty: 1 });
             }
             updateCartUI();
-            
-            // Automatically open animated sidebar
             toggleCart(true);
 
-            // Temporary visual feedback
             const countBadge = document.getElementById('cartCount');
             countBadge.classList.add('scale-150');
             setTimeout(() => countBadge.classList.remove('scale-150'), 200);
@@ -1666,7 +1543,6 @@
             let totalQty = 0;
             let totalCost = 0;
 
-            // Recalculate based on currently active prices (respects sales)
             cart.forEach(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
                 const price = getActivePrice(prodData);
@@ -1675,7 +1551,7 @@
             });
 
             cartCount.innerText = totalQty;
-            cartTotal.innerText = `PKR ${totalCost.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            cartTotal.innerText = window.formatPrice(totalCost);
 
             if (cart.length === 0) {
                 cartItems.innerHTML = `<p class="text-gray-500 text-center py-10 uppercase tracking-widest text-sm">Cart is empty.</p>`;
@@ -1692,7 +1568,7 @@
                     <img src="${imgUrl}" class="w-16 h-16 object-cover rounded border border-gray-700">
                     <div class="flex-1">
                         <h5 class="font-bold text-sm uppercase">${item.name}</h5>
-                        <p class="text-cyan-400 text-sm">PKR ${price.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                        <p class="text-cyan-400 text-sm">${window.formatPrice(price)}</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <button onclick="updateQty('${item.id}', -1)" class="w-6 h-6 rounded bg-gray-800 hover:bg-gray-700 flex items-center justify-center">-</button>
@@ -1742,9 +1618,8 @@
             }
             if (!document.getElementById('termsCheck').checked) return;
 
-            toggleCart(false); // Close sidebar automatically
+            toggleCart(false);
             
-            // Hide home views completely
             document.getElementById('homeShopSections').classList.add('hidden');
             document.querySelector('header').classList.add('hidden');
             document.getElementById('viewAllSection').classList.add('hidden');
@@ -1755,11 +1630,9 @@
             document.getElementById('productDetailSection').classList.add('hidden');
             document.getElementById('myOrdersSection').classList.add('hidden');
             
-            // Show dedicated checkout view
             document.getElementById('checkoutSection').classList.remove('hidden');
             document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Pre-fill email if user is logged in
             if(currentUser && currentUser.email) {
                 document.getElementById('chkEmail').value = currentUser.email;
             }
@@ -1770,7 +1643,7 @@
         window.closeCheckout = () => {
             document.getElementById('checkoutSection').classList.add('hidden');
             goHome(); 
-            toggleCart(true); // Open cart back up so they can edit
+            toggleCart(true); 
         };
 
         function renderCheckoutSummary() {
@@ -1793,20 +1666,18 @@
                     <div class="flex-1">
                         <h5 class="font-bold text-xs uppercase text-gray-200 tracking-wider">${item.name}</h5>
                     </div>
-                    <div class="text-cyan-400 font-bold text-sm">PKR ${itemTotal.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                    <div class="text-cyan-400 font-bold text-sm">${window.formatPrice(itemTotal)}</div>
                 </div>
                 `;
             }).join('');
             
             summaryContainer.innerHTML = itemsHtml;
-            document.getElementById('chkSubtotal').innerText = `PKR ${total.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            document.getElementById('chkTotal').innerText = `PKR ${total.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('chkSubtotal').innerText = window.formatPrice(total);
+            document.getElementById('chkTotal').innerText = window.formatPrice(total);
         }
 
         window.closeSuccess = () => {
             document.getElementById('successModal').classList.remove('active');
-            
-            // Automatically take them to their orders page if they are signed in!
             if (currentUser && !currentUser.isAnonymous) {
                 window.openMyOrders();
             } else {
@@ -1823,13 +1694,11 @@
                 myOrders = [];
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    // Match logged in user's email securely
                     if (data.customerEmail === email) {
                         myOrders.push({ id: doc.id, ...data });
                     }
                 });
                 
-                // Re-render instantly if the section is currently open
                 if (!document.getElementById('myOrdersSection').classList.contains('hidden')) {
                     renderMyOrders();
                 }
@@ -1838,7 +1707,7 @@
 
         window.openMyOrders = () => {
             if (!currentUser || currentUser.isAnonymous) {
-                handleUserClick(); // Prompt login if not signed in
+                handleUserClick(); 
                 return;
             }
 
@@ -1899,7 +1768,7 @@
                 const itemsHtml = order.items.map(item => `
                     <div class="flex justify-between text-sm py-2 border-b border-gray-800 last:border-0">
                         <span class="text-gray-300">${item.qty}x ${item.name}</span>
-                        <span class="text-cyan-400 font-mono">PKR ${(item.price * item.qty).toLocaleString('en-PK')}</span>
+                        <span class="text-cyan-400 font-mono">${window.formatPrice(item.price * item.qty)}</span>
                     </div>
                 `).join('');
 
@@ -1914,7 +1783,7 @@
                             <span class="text-xs uppercase tracking-widest px-3 py-1 rounded font-bold border ${statusColor}">
                                 ${statusText}
                             </span>
-                            <h4 class="text-xl font-bold mt-2 text-white">PKR ${order.totalAmount.toLocaleString('en-PK')}</h4>
+                            <h4 class="text-xl font-bold mt-2 text-white">${window.formatPrice(order.totalAmount)}</h4>
                         </div>
                     </div>
                     
@@ -1963,16 +1832,15 @@
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
             btn.setAttribute('disabled', 'true');
             
-            // Calculate final total securely before placing order
+            // Standardize total securely in PKR before placing order
             let finalTotalAmount = 0;
             const finalItems = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
                 const price = getActivePrice(prodData);
                 finalTotalAmount += (price * item.qty);
-                return { ...item, price: price }; // Freeze the price at checkout moment
+                return { ...item, price: price }; 
             });
 
-            // Bundle exactly like your requested screenshot details
             const orderData = {
                 customerEmail: document.getElementById('chkEmail').value,
                 shippingCountry: document.getElementById('chkCountry').value,
@@ -1985,22 +1853,20 @@
                 phone: document.getElementById('chkPhone').value,
                 items: finalItems,
                 totalAmount: finalTotalAmount,
+                displayCurrency: currentCurrency, // Logs what currency they checked out in
                 status: 'Pending',
                 createdAt: serverTimestamp()
             };
 
             try {
-                // Save massive detailed order to Firebase
                 await addDoc(collection(db, 'orders'), orderData);
                 
-                // Clear state upon success
                 cart = [];
                 updateCartUI();
                 e.target.reset();
                 document.getElementById('termsCheck').checked = false;
                 toggleCheckoutBtn();
                 
-                // Trigger beautiful success animation
                 document.getElementById('checkoutSection').classList.add('hidden');
                 document.getElementById('successModal').classList.add('active');
             } catch (error) {
@@ -2023,7 +1889,7 @@
                 const distance = endTime - now;
 
                 if (distance <= 0) {
-                    needsRender = true; // Sale expired! Trigger global re-render to remove sales badge & revert price.
+                    needsRender = true; 
                 } else {
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -2037,7 +1903,6 @@
                 }
             });
 
-            // If a sale just expired, immediately re-draw the UI to revert prices
             if (needsRender && products.length > 0) {
                 if (currentViewParams.type) {
                     renderViewAll(currentViewParams.type, currentViewParams.page);
