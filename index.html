@@ -253,7 +253,7 @@
                 </div>
                 <div class="flex gap-4 md:gap-6 items-center">
                     
-                    <!-- NEW: Currency Switcher -->
+                    <!-- Currency Switcher -->
                     <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-[#0a0a0c] text-cyan-400 font-bold text-xs md:text-sm outline-none cursor-pointer border border-cyan-900/50 rounded px-1 md:px-2 py-1 hover:border-cyan-400 transition hidden md:block">
                         <option value="PKR">PKR</option>
                         <option value="SAR">SAR</option>
@@ -262,7 +262,7 @@
                     <a href="#" onclick="scrollToSection('latestDrops'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Shop</a>
                     <a href="#" onclick="scrollToSection('contact'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Contact</a>
                     
-                    <!-- 1st: User Auth Button -->
+                    <!-- User Auth Button -->
                     <button onclick="handleUserClick()" class="relative text-white hover:text-cyan-400 transition-colors">
                         <img id="userAvatar" src="" class="hidden w-6 h-6 rounded-full border border-cyan-400 object-cover">
                         <i id="userIcon" class="fa-solid fa-user text-xl"></i>
@@ -273,7 +273,7 @@
                         <i class="fa-solid fa-box-open text-xl"></i>
                     </button>
 
-                    <!-- 2nd: Cart Button -->
+                    <!-- Cart Button -->
                     <button onclick="toggleCart()" class="relative text-white hover:text-cyan-400 transition-colors">
                         <i class="fa-solid fa-shopping-cart text-xl"></i>
                         <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
@@ -465,7 +465,7 @@
                             </div>
                             <div class="flex justify-between text-gray-400 text-sm tracking-wide">
                                 <span>Shipping</span>
-                                <span class="text-green-400 font-bold">FREE</span>
+                                <span id="chkShipping" class="font-bold text-white">PKR 300.00</span>
                             </div>
                             <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-800">
                                 <span class="text-xl font-bold uppercase tracking-widest">Total</span>
@@ -497,8 +497,8 @@
                     </div>
 
                     <div>
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">3. Currency</h3>
-                        <p>Prices can be displayed in Pakistani Rupees (PKR) or Saudi Riyals (SAR) based on your preference using the currency toggle. All backend processing and standard rates are managed in PKR.</p>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">3. Currency & Shipping</h3>
+                        <p>Prices can be displayed in Pakistani Rupees (PKR) or Saudi Riyals (SAR) using the currency toggle. A flat shipping fee is automatically applied at checkout depending on your selected currency.</p>
                     </div>
 
                     <div>
@@ -840,13 +840,12 @@
         const googleProvider = new GoogleAuthProvider();
 
         // ----------------------------------------------------
-        // NEW: CURRENCY ENGINE (PKR / SAR)
+        // CURRENCY ENGINE (PKR / SAR) + DYNAMIC SHIPPING
         // ----------------------------------------------------
         const EXCHANGE_RATE_PKR_TO_SAR = 1 / 74.5; // ~74.5 PKR = 1 SAR
         let currentCurrency = localStorage.getItem('appCurrency') || 'PKR';
-        window.currentOpenProductId = null; // Track open product for re-rendering
+        window.currentOpenProductId = null; 
 
-        // On Load: Set selector to saved currency
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currencySelector').value = currentCurrency;
             document.getElementById('currencySelectorMobile').value = currentCurrency;
@@ -858,7 +857,6 @@
             document.getElementById('currencySelector').value = curr;
             document.getElementById('currencySelectorMobile').value = curr;
 
-            // Trigger re-renders across the entire app
             if (currentViewParams.type) {
                 renderViewAll(currentViewParams.type, currentViewParams.page);
             } else {
@@ -887,9 +885,17 @@
             }
             return `PKR ${pkr.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         };
+
+        // NEW: Handles the strict requested shipping logic behind the scenes in PKR to ensure perfect conversion
+        window.getShippingFeePKR = () => {
+            return currentCurrency === 'SAR' ? (20 / EXCHANGE_RATE_PKR_TO_SAR) : 300;
+        };
+
+        window.getShippingFeeDisplay = () => {
+            return currentCurrency === 'SAR' ? 'SAR 20.00' : 'PKR 300.00';
+        };
         // ----------------------------------------------------
 
-        // State Management
         let cart = [];
         let products = [];
         let currentViewParams = { type: null, page: 1 };
@@ -897,7 +903,6 @@
         let myOrders = [];
         let ordersUnsubscribe = null;
 
-        // Scroll Observer Setup
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -912,7 +917,6 @@
             });
         }
 
-        // Smooth Scroll Logic
         window.scrollToSection = (id) => {
             if (currentViewParams.type !== null || 
                 !document.getElementById('checkoutSection').classList.contains('hidden') || 
@@ -950,7 +954,6 @@
             }, 50); 
         };
 
-        // 2. Preloader & Gate Animation Logic
         setTimeout(() => {
             document.getElementById('loaderContent').classList.add('fade-out');
             document.getElementById('gateLeft').classList.add('glow');
@@ -969,7 +972,6 @@
             }, 1900);
         }, 2600);
 
-        // 3. Initialize App Data & Auth Listener
         async function init() {
             try {
                 onAuthStateChanged(auth, async (user) => {
@@ -992,7 +994,7 @@
                                     lastActive: serverTimestamp()
                                 }, { merge: true });
                             }
-                        } catch(e) { console.error("Failed to save user email:", e); }
+                        } catch(e) { }
                         
                         listenToMyOrders(user.email);
                     } else {
@@ -1019,7 +1021,6 @@
             }
         }
 
-        // Auth Logic & Modals
         window.handleUserClick = () => {
             if (currentUser) {
                 const displayName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Customer';
@@ -1075,7 +1076,7 @@
                 btn.innerHTML = originalHtml;
             } catch (error) {
                 console.error("Auth Error:", error);
-                alert("Failed to sign in. Check console for details.");
+                alert("Failed to sign in.");
             }
         };
 
@@ -1084,7 +1085,6 @@
             closeProfile();
         };
 
-        // 4. Fetch Products from Firestore
         function loadProducts() {
             const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
             onSnapshot(q, (snapshot) => {
@@ -1120,7 +1120,6 @@
             const activePrice = getActivePrice(prod);
             const isSaleActive = activePrice !== parseFloat(prod.price);
             
-            // Replaced raw formatting with new formatPrice() function
             let priceHtml = `<p class="text-2xl font-light text-gray-300 mb-6">${window.formatPrice(activePrice)}</p>`;
             let badgeHtml = `<div class="absolute top-4 left-4 z-20 bg-black/80 text-cyan-400 text-xs font-bold px-3 py-1 rounded border border-cyan-900 uppercase tracking-widest">${prod.category || 'Apparel'}</div>`;
             let timerHtml = '';
@@ -1357,7 +1356,7 @@
             const prod = products.find(p => p.id === id);
             if (!prod) return;
 
-            window.currentOpenProductId = id; // Store ID for live currency updates
+            window.currentOpenProductId = id; 
 
             document.getElementById('homeShopSections').classList.add('hidden');
             document.querySelector('header').classList.add('hidden');
@@ -1541,17 +1540,17 @@
             const cartCount = document.getElementById('cartCount');
 
             let totalQty = 0;
-            let totalCost = 0;
+            let totalCostPKR = 0;
 
             cart.forEach(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
-                const price = getActivePrice(prodData);
+                const pricePKR = getActivePrice(prodData);
                 totalQty += item.qty;
-                totalCost += (price * item.qty);
+                totalCostPKR += (pricePKR * item.qty);
             });
 
             cartCount.innerText = totalQty;
-            cartTotal.innerText = window.formatPrice(totalCost);
+            cartTotal.innerText = window.formatPrice(totalCostPKR);
 
             if (cart.length === 0) {
                 cartItems.innerHTML = `<p class="text-gray-500 text-center py-10 uppercase tracking-widest text-sm">Cart is empty.</p>`;
@@ -1560,7 +1559,7 @@
 
             cartItems.innerHTML = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
-                const price = getActivePrice(prodData);
+                const pricePKR = getActivePrice(prodData);
                 const imgUrl = (prodData.images && prodData.images.length > 0) ? prodData.images[0] : prodData.image;
                 
                 return `
@@ -1568,7 +1567,7 @@
                     <img src="${imgUrl}" class="w-16 h-16 object-cover rounded border border-gray-700">
                     <div class="flex-1">
                         <h5 class="font-bold text-sm uppercase">${item.name}</h5>
-                        <p class="text-cyan-400 text-sm">${window.formatPrice(price)}</p>
+                        <p class="text-cyan-400 text-sm">${window.formatPrice(pricePKR)}</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <button onclick="updateQty('${item.id}', -1)" class="w-6 h-6 rounded bg-gray-800 hover:bg-gray-700 flex items-center justify-center">-</button>
@@ -1618,7 +1617,7 @@
             }
             if (!document.getElementById('termsCheck').checked) return;
 
-            toggleCart(false);
+            toggleCart(false); 
             
             document.getElementById('homeShopSections').classList.add('hidden');
             document.querySelector('header').classList.add('hidden');
@@ -1649,13 +1648,13 @@
         function renderCheckoutSummary() {
             const summaryContainer = document.getElementById('checkoutSummaryItems');
             
-            let total = 0;
+            let subtotalPKR = 0;
             const itemsHtml = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
-                const price = getActivePrice(prodData);
+                const pricePKR = getActivePrice(prodData);
                 const imgUrl = (prodData.images && prodData.images.length > 0) ? prodData.images[0] : prodData.image;
-                const itemTotal = price * item.qty;
-                total += itemTotal;
+                const itemTotalPKR = pricePKR * item.qty;
+                subtotalPKR += itemTotalPKR;
 
                 return `
                 <div class="flex items-center gap-4 bg-[#111] p-3 rounded border border-gray-800">
@@ -1666,14 +1665,19 @@
                     <div class="flex-1">
                         <h5 class="font-bold text-xs uppercase text-gray-200 tracking-wider">${item.name}</h5>
                     </div>
-                    <div class="text-cyan-400 font-bold text-sm">${window.formatPrice(itemTotal)}</div>
+                    <div class="text-cyan-400 font-bold text-sm">${window.formatPrice(itemTotalPKR)}</div>
                 </div>
                 `;
             }).join('');
             
             summaryContainer.innerHTML = itemsHtml;
-            document.getElementById('chkSubtotal').innerText = window.formatPrice(total);
-            document.getElementById('chkTotal').innerText = window.formatPrice(total);
+            
+            const shippingPKR = window.getShippingFeePKR();
+            const totalPKR = subtotalPKR + shippingPKR;
+
+            document.getElementById('chkSubtotal').innerText = window.formatPrice(subtotalPKR);
+            document.getElementById('chkShipping').innerText = window.getShippingFeeDisplay();
+            document.getElementById('chkTotal').innerText = window.formatPrice(totalPKR);
         }
 
         window.closeSuccess = () => {
@@ -1772,6 +1776,14 @@
                     </div>
                 `).join('');
 
+                const shippingFeePKR = order.shippingFee !== undefined ? order.shippingFee : (order.displayCurrency === 'SAR' ? (20 / EXCHANGE_RATE_PKR_TO_SAR) : 300);
+                const shippingHtml = `
+                    <div class="flex justify-between text-sm py-2 border-t border-gray-600 mt-2">
+                        <span class="text-gray-400">Shipping</span>
+                        <span class="text-cyan-400 font-mono">${window.formatPrice(shippingFeePKR)}</span>
+                    </div>
+                `;
+
                 return `
                 <div class="bg-[#111] border border-cyan-900/30 rounded-lg overflow-hidden shadow-lg neon-border mb-6">
                     <div class="bg-[#0a0a0c] p-6 border-b border-gray-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -1815,6 +1827,7 @@
                                 <h5 class="text-xs uppercase tracking-widest text-gray-500 mb-3 border-b border-gray-800 pb-2">Order Summary</h5>
                                 <div class="space-y-1">
                                     ${itemsHtml}
+                                    ${shippingHtml}
                                 </div>
                             </div>
                         </div>
@@ -1832,14 +1845,16 @@
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
             btn.setAttribute('disabled', 'true');
             
-            // Standardize total securely in PKR before placing order
-            let finalTotalAmount = 0;
+            let finalTotalAmountPKR = 0;
             const finalItems = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
-                const price = getActivePrice(prodData);
-                finalTotalAmount += (price * item.qty);
-                return { ...item, price: price }; 
+                const pricePKR = getActivePrice(prodData);
+                finalTotalAmountPKR += (pricePKR * item.qty);
+                return { ...item, price: pricePKR }; 
             });
+
+            const shippingPKR = window.getShippingFeePKR();
+            finalTotalAmountPKR += shippingPKR;
 
             const orderData = {
                 customerEmail: document.getElementById('chkEmail').value,
@@ -1852,8 +1867,9 @@
                 postalCode: document.getElementById('chkPostal').value,
                 phone: document.getElementById('chkPhone').value,
                 items: finalItems,
-                totalAmount: finalTotalAmount,
-                displayCurrency: currentCurrency, // Logs what currency they checked out in
+                shippingFee: shippingPKR, 
+                totalAmount: finalTotalAmountPKR,
+                displayCurrency: currentCurrency,
                 status: 'Pending',
                 createdAt: serverTimestamp()
             };
