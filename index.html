@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Million Mart | The Future of Fashion</title>
-    <!-- Custom Cloudinary logo -->
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dtx8hi2qz/image/upload/v1777824250/th_n79d5l.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +21,7 @@
             font-family: 'Rajdhani', sans-serif;
             background-color: var(--dark-bg);
             color: #ffffff;
-            overflow: hidden; /* Prevent scroll during load */
+            overflow: hidden;
         }
 
         h1, h2, h3, .logo-text {
@@ -231,7 +230,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- Preloader -->
     <div id="preloader">
         <div class="gate gate-left" id="gateLeft"></div>
         <div class="gate gate-right" id="gateRight"></div>
@@ -241,10 +239,8 @@
         </div>
     </div>
 
-    <!-- Main ContentWrapper -->
     <div id="mainContent" class="h-screen overflow-y-auto opacity-0 transition-opacity duration-1000">
         
-        <!-- Navigation -->
         <nav class="fixed w-full top-0 z-50 bg-[#050505]/90 backdrop-blur-md border-b border-cyan-900/50">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -253,33 +249,28 @@
                 </div>
                 <div class="flex gap-4 md:gap-6 items-center">
                     
-                    <!-- Currency Switcher -->
                     <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-[#0a0a0c] text-cyan-400 font-bold text-xs md:text-sm outline-none cursor-pointer border border-cyan-900/50 rounded px-1 md:px-2 py-1 hover:border-cyan-400 transition hidden md:block">
                         <option value="PKR">PKR</option>
                         <option value="SAR">SAR</option>
                     </select>
 
                     <a href="#" onclick="scrollToSection('latestDrops'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Shop</a>
-                    <a href="#" onclick="scrollToSection('contact'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Contact</a>
+                    <a href="#" onclick="scrollToSection('contactUsSection'); return false;" class="hidden md:block hover:text-cyan-400 transition-colors uppercase tracking-wider text-sm">Contact</a>
                     
-                    <!-- User Auth Button -->
                     <button onclick="handleUserClick()" class="relative text-white hover:text-cyan-400 transition-colors">
                         <img id="userAvatar" src="" class="hidden w-6 h-6 rounded-full border border-cyan-400 object-cover">
                         <i id="userIcon" class="fa-solid fa-user text-xl"></i>
                     </button>
 
-                    <!-- Orders Button -->
                     <button onclick="openMyOrders()" id="navOrdersBtn" class="relative text-white hover:text-cyan-400 transition-colors" title="My Orders">
                         <i class="fa-solid fa-box-open text-xl"></i>
                     </button>
 
-                    <!-- Cart Button -->
                     <button onclick="toggleCart()" class="relative text-white hover:text-cyan-400 transition-colors">
                         <i class="fa-solid fa-shopping-cart text-xl"></i>
                         <span id="cartCount" class="absolute -top-2 -right-2 bg-cyan-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </button>
                     
-                    <!-- Currency Switcher Mobile (Icon) -->
                     <select id="currencySelectorMobile" onchange="changeCurrency(this.value)" class="md:hidden bg-transparent text-cyan-400 font-bold text-xs outline-none cursor-pointer">
                         <option value="PKR" class="bg-[#0a0a0c]">PKR</option>
                         <option value="SAR" class="bg-[#0a0a0c]">SAR</option>
@@ -288,9 +279,7 @@
             </div>
         </nav>
 
-        <!-- Hero Section -->
         <header class="relative mt-20 pt-[180px] sm:pt-[220px] md:pt-[260px] lg:pt-[300px] pb-16 lg:pb-20 hero-bg text-center px-4 overflow-hidden">
-            <!-- Floating Orbs -->
             <div class="orb bg-cyan-600/20 w-64 h-64 top-10 left-10"></div>
             <div class="orb bg-blue-600/20 w-80 h-80 bottom-10 right-10" style="animation-delay: -5s;"></div>
             
@@ -304,9 +293,7 @@
             </div>
         </header>
 
-        <!-- Shop Sections Wrapper (Home) -->
         <div id="homeShopSections">
-            <!-- Latest Drops Section -->
             <section id="latestDrops" class="py-20 container mx-auto px-4">
                 <div class="reveal flex justify-between items-end mb-12 border-b border-gray-800 pb-4">
                     <h3 class="text-3xl font-bold uppercase tracking-widest text-white">Latest <span class="text-cyan-400">Drops</span></h3>
@@ -324,7 +311,6 @@
                 </div>
             </section>
 
-            <!-- Top Sales Section -->
             <section id="topSales" class="pb-20 container mx-auto px-4">
                 <div class="reveal flex justify-between items-end mb-12 border-b border-gray-800 pb-4">
                     <h3 class="text-3xl font-bold uppercase tracking-widest text-white">Top <span class="text-cyan-400">Sales</span></h3>
@@ -342,7 +328,6 @@
                 </div>
             </section>
 
-            <!-- Recommended Section -->
             <section id="recommended" class="pb-20 container mx-auto px-4">
                 <div class="reveal flex justify-between items-end mb-12 border-b border-gray-800 pb-4">
                     <h3 class="text-3xl font-bold uppercase tracking-widest text-white">Recommended <span class="text-cyan-400">Clothes</span></h3>
@@ -359,9 +344,31 @@
                     </button>
                 </div>
             </section>
+
+            <section id="contactUsSection" class="py-20 container mx-auto px-4 reveal">
+                <div class="max-w-4xl mx-auto bg-[#0a0a0c] border border-cyan-900/50 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(0,243,255,0.05)]">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="p-8 md:p-12 bg-gradient-to-br from-cyan-900/20 to-transparent">
+                            <h3 class="text-3xl font-bold uppercase tracking-widest text-white mb-6">Get In <span class="text-cyan-400">Touch</span></h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">Have a question or need assistance with your order? Fill out the form, and our support team will get back to you shortly.</p>
+                        </div>
+
+                        <div class="p-8 md:p-12 bg-[#0a0a0c]">
+                            <form id="contactForm" class="space-y-4">
+                                <input type="text" id="msgName" required placeholder="Full Name" class="neon-input w-full p-4 rounded text-sm">
+                                <input type="email" id="msgEmail" required placeholder="Email Address" class="neon-input w-full p-4 rounded text-sm">
+                                <textarea id="msgBody" required rows="4" placeholder="Your Message" class="neon-input w-full p-4 rounded text-sm"></textarea>
+                                <button type="submit" id="btnSendMessage" class="neon-button w-full py-4 font-bold rounded uppercase tracking-widest text-sm">
+                                    Send Message
+                                </button>
+                                <p id="msgResponse" class="hidden text-center text-xs font-bold uppercase tracking-widest mt-2"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- View All Section -->
         <section id="viewAllSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -372,21 +379,15 @@
             </div>
             
             <div id="viewAllGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Paginated products injected here -->
-            </div>
+                </div>
             
-            <!-- Pagination Controls -->
             <div id="paginationControls" class="flex justify-center items-center mt-16 gap-2">
-                <!-- Buttons injected here -->
-            </div>
+                </div>
         </section>
 
-        <!-- Product Details Section -->
         <section id="productDetailSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
-            <!-- Content injected here via JS -->
-        </section>
+            </section>
 
-        <!-- My Orders Section -->
         <section id="myOrdersSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -394,19 +395,16 @@
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-3xl font-bold uppercase tracking-widest text-white mb-8 border-b border-gray-800 pb-4">My <span class="text-cyan-400">Orders</span></h2>
                 <div id="myOrdersList" class="space-y-6">
-                    <!-- Orders injected here via JS -->
-                </div>
+                    </div>
             </div>
         </section>
 
-        <!-- Checkout Section -->
         <section id="checkoutSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="closeCheckout()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Return to Cart
             </button>
             
             <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
-                <!-- Left: Form -->
                 <div class="flex-1">
                     <form id="checkoutForm" class="space-y-8">
                         <div>
@@ -449,14 +447,12 @@
                     </form>
                 </div>
                 
-                <!-- Right: Summary -->
                 <div class="lg:w-5/12">
                     <div class="bg-[#0a0a0c] border border-cyan-900/50 rounded-lg p-6 lg:p-8 sticky top-32 shadow-[0_0_20px_rgba(0,243,255,0.05)]">
                         <h3 class="text-xl font-bold uppercase tracking-widest mb-6 border-b border-gray-800 pb-4">Order <span class="text-cyan-400">Summary</span></h3>
                         
                         <div id="checkoutSummaryItems" class="space-y-4 max-h-80 overflow-y-auto mb-6 pr-2">
-                            <!-- Items injected here via JS -->
-                        </div>
+                            </div>
                         
                         <div class="border-t border-gray-800 pt-6 space-y-4">
                             <div class="flex justify-between text-gray-400 text-sm tracking-wide">
@@ -477,7 +473,6 @@
             </div>
         </section>
 
-        <!-- Terms of Service Section -->
         <section id="termsSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -516,18 +511,10 @@
                         </ul>
                         <p class="mt-2">Million Mart reserves the right to cancel any order if the information provided is incorrect or suspicious.</p>
                     </div>
-
-                    <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact Information</h3>
-                        <p class="mb-2">If you have any questions about these Terms of Service, please contact us:</p>
-                        <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
-                        <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section id="faqSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -555,18 +542,10 @@
                         <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">4. How long does delivery take?</h3>
                         <p>Delivery usually takes 3–7 working days, depending on your city and location.</p>
                     </div>
-
-                    <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact customer support?</h3>
-                        <p class="mb-2">You can contact us through:</p>
-                        <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
-                        <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Shipping Policy Section -->
         <section id="shippingSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -598,18 +577,10 @@
                             <li><strong>Other Cities & Remote Areas:</strong> 3–7 working days</li>
                         </ul>
                     </div>
-
-                    <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact Us</h3>
-                        <p class="mb-2">If you have any questions about shipping, you can contact us:</p>
-                        <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
-                        <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Return Policy Section -->
         <section id="returnSection" class="hidden pt-32 pb-20 container mx-auto px-4 min-h-screen">
             <button onclick="goHome()" class="mb-8 text-gray-400 hover:text-cyan-400 transition uppercase tracking-widest text-sm flex items-center group">
                 <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-2 transition"></i> Back to Home
@@ -651,21 +622,38 @@
                         </ul>
                     </div>
 
-                    <div class="bg-[#111] border border-gray-800 p-6 rounded">
-                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">Contact Us</h3>
-                        <p class="mb-2">For return or refund requests, please contact us:</p>
-                        <p><strong class="text-white">Email:</strong> <a href="mailto:lalsherbakhtshadllc@gmail.com" class="text-cyan-400 hover:underline transition">lalsherbakhtshadllc@gmail.com</a></p>
-                        <p><strong class="text-white">WhatsApp:</strong> <a href="https://wa.me/923154640054" target="_blank" class="text-cyan-400 hover:underline transition">03154640054</a></p>
+                    <div>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">4. Exchange Policy</h3>
+                        <p>If your return request is approved, we may offer:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                            <li>Product exchange, or</li>
+                            <li>Replacement of the same item</li>
+                        </ul>
+                        <p class="mt-2">depending on product availability.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">5. Refund Policy</h3>
+                        <p>Refunds may be issued if:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                            <li>The replacement product is not available</li>
+                            <li>The returned product is confirmed defective or incorrect</li>
+                        </ul>
+                        <p class="mt-2">Refunds may be processed through bank transfer or other agreed method after the returned product is received and inspected.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-cyan-400 font-bold text-lg mb-2 uppercase tracking-widest">6. Return Shipping</h3>
+                        <p>If the return is approved due to our mistake (wrong or damaged item), the return shipping cost may be covered by us.</p>
+                        <p class="mt-2">If the return is requested for other reasons, the customer may be responsible for return shipping costs.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer / Contact -->
-        <footer id="contact" class="bg-[#0a0a0c] border-t border-cyan-900/30 pt-16 pb-8 overflow-hidden">
-            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <footer class="bg-[#0a0a0c] border-t border-cyan-900/30 pt-16 pb-8 overflow-hidden">
+            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 
-                <!-- About -->
                 <div class="reveal">
                     <h1 class="logo-text text-2xl font-bold tracking-wider text-white mb-4">MILLION <span class="text-cyan-400">MART</span></h1>
                     <p class="text-gray-400 text-sm leading-relaxed mb-6">
@@ -673,7 +661,6 @@
                     </p>
                 </div>
 
-                <!-- Help -->
                 <div class="reveal delay-100">
                     <h4 class="text-lg font-bold uppercase tracking-widest mb-4 text-cyan-400">Help</h4>
                     <ul class="space-y-3 text-sm text-gray-300">
@@ -684,27 +671,7 @@
                     </ul>
                 </div>
 
-                <!-- Contact -->
                 <div class="reveal delay-200">
-                    <h4 class="text-lg font-bold uppercase tracking-widest mb-4 text-cyan-400">Connect With Us</h4>
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-center gap-3">
-                            <i class="fa-brands fa-whatsapp text-xl text-green-400"></i>
-                            <a href="https://wa.me/923154640054" target="_blank" class="hover:text-cyan-400 transition">03154640054</a>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-regular fa-envelope text-xl"></i>
-                            <a href="mailto:lalsherbakhtshadllc@gmail.com" class="hover:text-cyan-400 transition text-sm">lalsherbakhtshadllc@gmail.com</a>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-brands fa-telegram text-xl text-blue-400"></i>
-                            <a href="https://t.me/+966510951794" target="_blank" class="hover:text-cyan-400 transition">+966510951794</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Socials -->
-                <div class="reveal delay-300">
                     <h4 class="text-lg font-bold uppercase tracking-widest mb-4 text-cyan-400">Follow Us</h4>
                     <div class="flex gap-4">
                         <a href="https://www.facebook.com/share/1DVbBeXYeL/" target="_blank" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:border-cyan-400 hover:text-cyan-400 transition transform hover:-translate-y-1">
@@ -727,7 +694,6 @@
         </footer>
     </div>
 
-    <!-- Cart Sidebar & Backdrop -->
     <div id="cartBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90] opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCart(false)"></div>
     <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#0a0a0c] border-l border-cyan-900/50 shadow-[0_0_40px_rgba(0,243,255,0.15)] z-[100] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
         <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -735,7 +701,6 @@
             <button onclick="toggleCart(false)" class="text-gray-400 hover:text-white transition transform hover:rotate-90"><i class="fa-solid fa-xmark text-2xl"></i></button>
         </div>
         <div id="cartItems" class="p-6 overflow-y-auto flex-1 space-y-4">
-            <!-- Cart items injected here -->
             <p class="text-gray-500 text-center py-10">Cart is empty.</p>
         </div>
         <div class="p-6 border-t border-gray-800 bg-[#050505]">
@@ -757,13 +722,12 @@
         </div>
     </div>
 
-    <!-- Success Order Modal -->
     <div id="successModal" class="modal fixed inset-0 z-[110] flex items-center justify-center px-4">
         <div class="bg-[#0a0a0c] border border-cyan-400 shadow-[0_0_40px_rgba(0,243,255,0.3)] rounded-lg w-full max-w-md p-8 text-center relative">
             <i class="fa-solid fa-circle-check text-6xl text-cyan-400 mb-6 drop-shadow-[0_0_15px_rgba(0,243,255,0.5)]"></i>
             <h3 class="text-2xl font-bold uppercase tracking-widest mb-2 text-white">Order Placed!</h3>
             <p class="text-gray-400 text-sm leading-relaxed mb-8">
-                Thank you for your purchase! We have successfully received your order and will contact you via email or phone number shortly with your shipping details.
+                Thank you for your purchase! We have successfully received your order and will contact you shortly with your shipping details.
             </p>
             <button onclick="closeSuccess()" class="neon-button w-full py-3 font-bold rounded">
                 Continue Shopping
@@ -771,13 +735,11 @@
         </div>
     </div>
 
-    <!-- Auth Modal -->
     <div id="authModal" class="modal fixed inset-0 z-[90] flex items-center justify-center px-4">
         <div class="bg-[#0a0a0c] border border-cyan-900 shadow-[0_0_30px_rgba(0,243,255,0.2)] rounded-lg w-full max-w-sm p-8 relative text-center">
             <button onclick="closeAuth()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-2xl font-bold uppercase tracking-widest mb-6">Welcome</h3>
 
-            <!-- Email Form -->
             <div id="formEmail" class="space-y-4 mb-6">
                 <input type="email" id="authEmail" placeholder="Email Address" class="neon-input w-full p-3 rounded text-sm text-center">
                 <input type="password" id="authPassword" placeholder="Password" class="neon-input w-full p-3 rounded text-sm text-center">
@@ -802,7 +764,6 @@
         </div>
     </div>
 
-    <!-- Profile Modal -->
     <div id="profileModal" class="modal fixed inset-0 z-[90] flex items-center justify-center px-4">
         <div class="bg-[#0a0a0c] border border-cyan-900 shadow-[0_0_30px_rgba(0,243,255,0.2)] rounded-lg w-full max-w-sm p-8 relative text-center">
             <button onclick="closeProfile()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -816,7 +777,6 @@
         </div>
     </div>
 
-    <!-- Application Logic & Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, orderBy, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -842,7 +802,7 @@
         // ----------------------------------------------------
         // CURRENCY ENGINE (PKR / SAR) + DYNAMIC SHIPPING
         // ----------------------------------------------------
-        const EXCHANGE_RATE_PKR_TO_SAR = 1 / 74.5; // ~74.5 PKR = 1 SAR
+        const EXCHANGE_RATE_PKR_TO_SAR = 1 / 74.5;
         let currentCurrency = localStorage.getItem('appCurrency') || 'PKR';
         window.currentOpenProductId = null; 
 
@@ -875,18 +835,30 @@
             }
         };
 
-        window.formatPrice = (priceInPKR) => {
+        window.formatPrice = (priceInPKR, overrideSar = null) => {
             const pkr = parseFloat(priceInPKR);
             if (isNaN(pkr)) return '';
             
             if (currentCurrency === 'SAR') {
+                if (overrideSar !== null && overrideSar !== undefined && !isNaN(overrideSar)) {
+                    return `SAR ${parseFloat(overrideSar).toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                }
                 const sar = pkr * EXCHANGE_RATE_PKR_TO_SAR;
                 return `SAR ${sar.toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             }
-            return `PKR ${pkr.toLocaleString('en-PK', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            return `PKR ${pkr.toLocaleString('en-PK', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
         };
 
-        // NEW: Handles the strict requested shipping logic behind the scenes in PKR to ensure perfect conversion
+        window.getActivePriceSAR = (prod) => {
+            const now = new Date().getTime();
+            if (prod.sale && prod.sale.enabled) {
+                if (!prod.sale.endTime || isNaN(prod.sale.endTime) || prod.sale.endTime > now) {
+                    return prod.sale.discountedPriceSAR !== undefined ? prod.sale.discountedPriceSAR : null;
+                }
+            }
+            return prod.priceSAR !== undefined ? prod.priceSAR : null; 
+        };
+
         window.getShippingFeePKR = () => {
             return currentCurrency === 'SAR' ? (20 / EXCHANGE_RATE_PKR_TO_SAR) : 300;
         };
@@ -894,7 +866,6 @@
         window.getShippingFeeDisplay = () => {
             return currentCurrency === 'SAR' ? 'SAR 20.00' : 'PKR 300.00';
         };
-        // ----------------------------------------------------
 
         let cart = [];
         let products = [];
@@ -1118,17 +1089,18 @@
 
         function createProductCard(prod, index = 0) {
             const activePrice = getActivePrice(prod);
+            const activePriceSAR = window.getActivePriceSAR(prod);
             const isSaleActive = activePrice !== parseFloat(prod.price);
             
-            let priceHtml = `<p class="text-2xl font-light text-gray-300 mb-6">${window.formatPrice(activePrice)}</p>`;
+            let priceHtml = `<p class="text-2xl font-light text-gray-300 mb-6">${window.formatPrice(activePrice, activePriceSAR)}</p>`;
             let badgeHtml = `<div class="absolute top-4 left-4 z-20 bg-black/80 text-cyan-400 text-xs font-bold px-3 py-1 rounded border border-cyan-900 uppercase tracking-widest">${prod.category || 'Apparel'}</div>`;
             let timerHtml = '';
 
             if (isSaleActive) {
                 priceHtml = `
                     <div class="mb-6 flex flex-col">
-                        <span class="text-gray-500 line-through text-sm">${window.formatPrice(prod.price)}</span>
-                        <span class="text-2xl font-bold text-cyan-400">${window.formatPrice(activePrice)}</span>
+                        <span class="text-gray-500 line-through text-sm">${window.formatPrice(prod.price, prod.priceSAR)}</span>
+                        <span class="text-2xl font-bold text-cyan-400">${window.formatPrice(activePrice, activePriceSAR)}</span>
                     </div>
                 `;
                 badgeHtml += `<div class="absolute top-4 right-4 z-20 bg-red-600/90 text-white text-xs font-bold px-3 py-1 rounded shadow-[0_0_15px_rgba(220,38,38,0.5)] uppercase tracking-widest animate-pulse"><i class="fa-solid fa-bolt mr-1"></i> Sale</div>`;
@@ -1373,9 +1345,11 @@
             document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
 
             const activePrice = getActivePrice(prod);
-            let priceHtml = `${window.formatPrice(activePrice)}`;
+            const activePriceSAR = window.getActivePriceSAR(prod);
+            
+            let priceHtml = `${window.formatPrice(activePrice, activePriceSAR)}`;
             if (activePrice !== parseFloat(prod.price)) {
-                priceHtml = `<span class="text-gray-500 line-through text-xl md:text-2xl mr-2">${window.formatPrice(prod.price)}</span> <span class="text-cyan-400">${window.formatPrice(activePrice)}</span>`;
+                priceHtml = `<span class="text-gray-500 line-through text-xl md:text-2xl mr-2">${window.formatPrice(prod.price, prod.priceSAR)}</span> <span class="text-cyan-400">${window.formatPrice(activePrice, activePriceSAR)}</span>`;
             }
 
             const mainImg = (prod.images && prod.images.length > 0) ? prod.images[0] : prod.image;
@@ -1541,16 +1515,30 @@
 
             let totalQty = 0;
             let totalCostPKR = 0;
+            let totalCostSAR = 0;
 
             cart.forEach(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
                 const pricePKR = getActivePrice(prodData);
+                const priceSAR = window.getActivePriceSAR(prodData);
+                
                 totalQty += item.qty;
                 totalCostPKR += (pricePKR * item.qty);
+                
+                if (priceSAR !== null) {
+                    totalCostSAR += (priceSAR * item.qty);
+                } else {
+                    totalCostSAR += ((pricePKR * EXCHANGE_RATE_PKR_TO_SAR) * item.qty);
+                }
             });
 
             cartCount.innerText = totalQty;
-            cartTotal.innerText = window.formatPrice(totalCostPKR);
+            
+            if (currentCurrency === 'SAR') {
+                cartTotal.innerText = `SAR ${totalCostSAR.toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            } else {
+                cartTotal.innerText = `PKR ${totalCostPKR.toLocaleString('en-PK', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+            }
 
             if (cart.length === 0) {
                 cartItems.innerHTML = `<p class="text-gray-500 text-center py-10 uppercase tracking-widest text-sm">Cart is empty.</p>`;
@@ -1560,6 +1548,7 @@
             cartItems.innerHTML = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
                 const pricePKR = getActivePrice(prodData);
+                const priceSAR = window.getActivePriceSAR(prodData);
                 const imgUrl = (prodData.images && prodData.images.length > 0) ? prodData.images[0] : prodData.image;
                 
                 return `
@@ -1567,7 +1556,7 @@
                     <img src="${imgUrl}" class="w-16 h-16 object-cover rounded border border-gray-700">
                     <div class="flex-1">
                         <h5 class="font-bold text-sm uppercase">${item.name}</h5>
-                        <p class="text-cyan-400 text-sm">${window.formatPrice(pricePKR)}</p>
+                        <p class="text-cyan-400 text-sm">${window.formatPrice(pricePKR, priceSAR)}</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <button onclick="updateQty('${item.id}', -1)" class="w-6 h-6 rounded bg-gray-800 hover:bg-gray-700 flex items-center justify-center">-</button>
@@ -1649,12 +1638,22 @@
             const summaryContainer = document.getElementById('checkoutSummaryItems');
             
             let subtotalPKR = 0;
+            let subtotalSAR = 0;
+
             const itemsHtml = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
                 const pricePKR = getActivePrice(prodData);
+                const priceSAR = window.getActivePriceSAR(prodData);
                 const imgUrl = (prodData.images && prodData.images.length > 0) ? prodData.images[0] : prodData.image;
+                
                 const itemTotalPKR = pricePKR * item.qty;
                 subtotalPKR += itemTotalPKR;
+                
+                if (priceSAR !== null) {
+                    subtotalSAR += (priceSAR * item.qty);
+                } else {
+                    subtotalSAR += ((pricePKR * EXCHANGE_RATE_PKR_TO_SAR) * item.qty);
+                }
 
                 return `
                 <div class="flex items-center gap-4 bg-[#111] p-3 rounded border border-gray-800">
@@ -1665,7 +1664,7 @@
                     <div class="flex-1">
                         <h5 class="font-bold text-xs uppercase text-gray-200 tracking-wider">${item.name}</h5>
                     </div>
-                    <div class="text-cyan-400 font-bold text-sm">${window.formatPrice(itemTotalPKR)}</div>
+                    <div class="text-cyan-400 font-bold text-sm">${window.formatPrice(itemTotalPKR, priceSAR !== null ? (priceSAR * item.qty) : null)}</div>
                 </div>
                 `;
             }).join('');
@@ -1674,10 +1673,17 @@
             
             const shippingPKR = window.getShippingFeePKR();
             const totalPKR = subtotalPKR + shippingPKR;
+            const totalSAR = subtotalSAR + (shippingPKR * EXCHANGE_RATE_PKR_TO_SAR);
 
-            document.getElementById('chkSubtotal').innerText = window.formatPrice(subtotalPKR);
+            if (currentCurrency === 'SAR') {
+                document.getElementById('chkSubtotal').innerText = `SAR ${subtotalSAR.toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('chkTotal').innerText = `SAR ${totalSAR.toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            } else {
+                document.getElementById('chkSubtotal').innerText = `PKR ${subtotalPKR.toLocaleString('en-PK', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+                document.getElementById('chkTotal').innerText = `PKR ${totalPKR.toLocaleString('en-PK', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+            }
+
             document.getElementById('chkShipping').innerText = window.getShippingFeeDisplay();
-            document.getElementById('chkTotal').innerText = window.formatPrice(totalPKR);
         }
 
         window.closeSuccess = () => {
@@ -1772,7 +1778,7 @@
                 const itemsHtml = order.items.map(item => `
                     <div class="flex justify-between text-sm py-2 border-b border-gray-800 last:border-0">
                         <span class="text-gray-300">${item.qty}x ${item.name}</span>
-                        <span class="text-cyan-400 font-mono">${window.formatPrice(item.price * item.qty)}</span>
+                        <span class="text-cyan-400 font-mono">${window.formatPrice(item.price * item.qty, item.priceSAR ? item.priceSAR * item.qty : null)}</span>
                     </div>
                 `).join('');
 
@@ -1783,6 +1789,19 @@
                         <span class="text-cyan-400 font-mono">${window.formatPrice(shippingFeePKR)}</span>
                     </div>
                 `;
+
+                let totalDisplay = '';
+                if (currentCurrency === 'SAR') {
+                    let totalSAR = 0;
+                    order.items.forEach(item => {
+                         if (item.priceSAR) totalSAR += (item.priceSAR * item.qty);
+                         else totalSAR += ((item.price * EXCHANGE_RATE_PKR_TO_SAR) * item.qty);
+                    });
+                    totalSAR += (shippingFeePKR * EXCHANGE_RATE_PKR_TO_SAR);
+                    totalDisplay = `SAR ${totalSAR.toLocaleString('en-SA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                } else {
+                    totalDisplay = `PKR ${order.totalAmount.toLocaleString('en-PK', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+                }
 
                 return `
                 <div class="bg-[#111] border border-cyan-900/30 rounded-lg overflow-hidden shadow-lg neon-border mb-6">
@@ -1795,7 +1814,7 @@
                             <span class="text-xs uppercase tracking-widest px-3 py-1 rounded font-bold border ${statusColor}">
                                 ${statusText}
                             </span>
-                            <h4 class="text-xl font-bold mt-2 text-white">${window.formatPrice(order.totalAmount)}</h4>
+                            <h4 class="text-xl font-bold mt-2 text-white">${totalDisplay}</h4>
                         </div>
                     </div>
                     
@@ -1837,6 +1856,37 @@
             }).join('');
         }
 
+        // --- CONTACT FORM SUBMISSION LOGIC ---
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSendMessage');
+            const resEl = document.getElementById('msgResponse');
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting...';
+            btn.setAttribute('disabled', 'true');
+            
+            try {
+                await addDoc(collection(db, 'contact_messages'), {
+                    name: document.getElementById('msgName').value,
+                    email: document.getElementById('msgEmail').value,
+                    message: document.getElementById('msgBody').value,
+                    createdAt: serverTimestamp()
+                });
+                
+                resEl.innerText = "Transmission Complete. We'll get back to you soon.";
+                resEl.className = "text-center text-xs font-bold uppercase tracking-widest mt-2 text-green-400 block";
+                e.target.reset();
+                setTimeout(() => resEl.classList.add('hidden'), 5000);
+            } catch (err) {
+                console.error(err);
+                resEl.innerText = "Transmission Failure. Please try again.";
+                resEl.className = "text-center text-xs font-bold uppercase tracking-widest mt-2 text-red-500 block";
+            } finally {
+                btn.innerHTML = 'Send Message';
+                btn.removeAttribute('disabled');
+            }
+        });
+
         // 7. Form Submissions to Firebase
         document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1849,8 +1899,14 @@
             const finalItems = cart.map(item => {
                 const prodData = products.find(p => p.id === item.id) || item;
                 const pricePKR = getActivePrice(prodData);
+                const priceSAR = window.getActivePriceSAR(prodData);
                 finalTotalAmountPKR += (pricePKR * item.qty);
-                return { ...item, price: pricePKR }; 
+                
+                return { 
+                    ...item, 
+                    price: pricePKR,
+                    priceSAR: priceSAR 
+                }; 
             });
 
             const shippingPKR = window.getShippingFeePKR();
